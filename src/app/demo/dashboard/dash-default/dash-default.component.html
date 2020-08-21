@@ -1,0 +1,153 @@
+<div class="row">
+  <!-- project and team member start -->
+  <div class="col-xl-12 col-md-12">
+    <div style="margin-bottom: 20px;">
+      <div class="btn-group dropdown" ngbDropdown placement="auto"> 
+        <button type="button" class="btn btn-primary" ngbDropdownToggle>Primary</button>
+        <div ngbDropdownMenu>
+          <a class="dropdown-item" href="javascript:">12a1</a>
+          <a class="dropdown-item" href="javascript:">12a2</a>
+          <a class="dropdown-item" href="javascript:">12a3</a>
+        </div>
+      </div>
+      
+      <div class="btn-group dropdown" style="margin-left: 20px;" ngbDropdown placement="auto">
+        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>{{defaulClass}}</button> 
+        <div ngbDropdownMenu>
+          <a class="dropdown-item" href="javascript:" (click)="chooseClass('12a1')">12a1</a>
+          <a class="dropdown-item" href="javascript:" (click)="chooseClass('12a2')">12a2</a>
+          <a class="dropdown-item" href="javascript:" (click)="chooseClass('12a3')">12a3</a>
+        </div>
+      </div>
+    </div>
+    <app-card cardTitle="Classroom Management" [options]="false">
+      <div *ngIf="!issearch && !isadd">
+        <div class="btn-group handlebutton dropdown" style="margin-left: 20px;" ngbDropdown placement="auto">
+          <button type="button" class="btn btn-outline-primary" ngbDropdownToggle><i class="feather icon-menu" style="margin-right: 10px;"></i>Menu</button> 
+          <div ngbDropdownMenu>
+            <a class="dropdown-item" href="javascript:">Schedule</a>
+            <a class="dropdown-item" href="javascript:">Change class</a>
+            <a class="dropdown-item" href="javascript:">Transfer school</a>
+          </div>
+        </div>
+  
+        <button type="button" (click)="gotoadd()" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="feather icon-plus-square" style="margin-right: 10px;"></i>Add</button> 
+        <button type="button" (click)="gotosearch()" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="feather icon-search" style="margin-right: 10px;"></i>Search</button> 
+        <button type="button" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="feather icon-download" style="margin-right: 10px;"></i>Import</button> 
+        <button type="button" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="fa fa-file-export" style="margin-right: 10px;"></i>Export</button> 
+        <button type="button" (click)="reload(true)" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="feather icon-refresh-cw" style="margin-right: 10px;"></i>Reload</button> 
+      </div>
+
+      <div [ngStyle]="{'display': issearch? 'flex' : 'unset'}">
+        <div *ngIf="issearch" class="col-md-6 handlebutton">
+          <div class="input-group mb-3">
+            <input type="text" [(ngModel)]="keyword" (focusout)="reload()" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button (click)="search()" class="btn btn-primary" type="button"><i class="feather icon-search" style="margin-right: 10px;"></i>Search</button>
+            </div>
+          </div> 
+        </div>
+  
+        <div *ngIf="isadd" [formGroup]="studentForm" action="javascript:" class="needs-validation" novalidate style="padding: 0 20px 0 20px;">
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationFullname">Full name</label>
+              <input type="text" formControlName="fullname" class="form-control" id="validationCustom01" placeholder="Full name" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationSex" for="inputGroupSelectSex">Sex</label>
+              <select class="custom-select" formControlName="sex" id="inputGroupSelectSex">
+                <option value="Nu">Nu</option>
+                <option value="Nam">Nam</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationBirthday">Birthday</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationProvince">Province</label>
+              <select class="custom-select" placeholder="Choose..." formControlName="provin" id="inputGroupSelectProvince">
+                <option selected>Choose...</option>
+                <option value="Tp.HCM">Tp.HCM</option>
+                <option value="Dong Nai">Dong Nai</option>
+                <option value="Hai Phong">Hai Phong</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationDistrict">District</label>
+              <input type="text" formControlName="district" class="form-control" id="validationDistrictInput" placeholder="District" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationNumber">Apartment number</label>
+              <input type="text" formControlName="number" class="form-control" id="validationNumber" placeholder="Number" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationFaName">Father's name</label>
+              <input type="text" formControlName="faName" class="form-control" id="validationFaName" placeholder="Father's name" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationMoName">Mother's name</label>
+              <input type="text" formControlName="moName" class="form-control" id="validationMoName" placeholder="Mother's name" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationPhone">Phone number</label>
+              <input type="text" formControlName="phone" class="form-control" id="validationphone" placeholder="Phone" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationClass" for="inputGroupSelectClass">Class</label>
+              <select class="custom-select" formControlName="class" id="inputGroupSelectClass">
+                <option value="12a1">12a1</option>
+                <option value="12a2">12a2</option>
+                <option value="12a3">12a3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+  
+        <div *ngIf="isadd || issearch" style="padding: 0 20px 0 20px;">
+          <button *ngIf="isadd" type="button" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="fa fa-save" style="margin-right: 10px;"></i>Save</button> 
+          <button *ngIf="isadd" type="button" (click)="add()" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="feather icon-plus-square" style="margin-right: 10px;"></i>Add</button> 
+          <button type="button" (click)="back()" class="btn btn-outline-primary handlebutton" ngbTooltip="btn-outline-primary"><i class="fa fa-backspace" style="margin-right: 10px;"></i>Back</button> 
+        </div>
+      </div>
+  
+      <div class="table-responsive" style="padding: 20px 20px 20px 20px;">
+        <table class="table table-hover mb-0" style="border: 1px solid #e2e5e8;">
+          <thead>
+          <tr>
+            <th>
+              No.
+              <button (click)="sort('no')" type="button" class="btn btn-outline-secondary buttonsort"><i class="fa fa-caret-up"></i></button>
+            </th>
+            <th>
+              Full name
+              <button (click)="sort('fullname')" type="button" class="btn btn-outline-secondary buttonsort"><i class="fa fa-caret-up"></i></button>
+            </th>
+            <th>Sex</th>
+            <th>Address</th>
+            <th>Father's name</th>
+            <th>Mother's name</th>
+            <th>Phone number</th>
+            <th class="text-right">Birthday</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of listStudent">
+            <td>{{item.id}}</td>
+            <td>{{item.fullname}}</td>
+            <td>{{item.sex}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.faName}}</td>
+            <td>{{item.moName}}</td>
+            <td>{{item.phone}}</td>
+            <td class="text-right">{{item.birthday}}</td>
+            <!-- <td class="text-right"><label class="badge badge-light-danger">Low</label></td> -->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>
